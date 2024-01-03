@@ -2,12 +2,12 @@ const express = require('express');
 const axios = require('axios');
 
 const cors = require('cors');
-
+require('dotenv').config();
 
 
 const app = express();
 app.use(cors());
-const apiKey = 'd0a1f718407318768687dbb27a5a55a8'; 
+const apiKey = process.env.OPENWEATHERMAP_API_KEY; 
 app.use(express.json());
 
 app.post('/getWeather', async (req, res) => {
@@ -19,7 +19,7 @@ app.post('/getWeather', async (req, res) => {
 
   const weatherData = {};
 
-  // Fetch weather for each city in parallel
+  
   await Promise.all(
     cities.map(async (city) => {
       try {
